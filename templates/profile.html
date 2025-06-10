@@ -1,0 +1,86 @@
+{% include 'header.html' %}
+
+<div class="profile-container">
+
+        <div>
+            <h2 class="profile-heading">PATIENT PROFILE</h2><hr>
+        </div>
+     <section class="profile-heading">
+        <div>
+<!--            <img class="img" src="{{url_for('static', filename='images/icon.jpg')}}" >-->
+        </div>
+        <div>
+            <h2 class="profile-heading">{{patient.name}}</h2>
+        </div>
+    </section><hr>
+
+        <section>
+            <table class="table">
+                <thead>
+                <tr class="data-heading">
+                    <th>Data</th>
+                    <th>Value</th>
+                </tr>
+                </thead>
+                <tbody class="data-values">
+                <tr>
+                    <td><div><span >Patient ID/Birth No.:</span> </div></td>
+                     <td>{{patient.birth_id}}</td>
+
+                <tr>
+                    <td><div><span > Date of Birth:</span> </div></td>
+                     <td>{{patient.dob}}</td>
+                </tr>
+                <tr>
+                    <td> <div><span >Emergency Contact Name:</span> </div></td>
+                     <td>{{patient.emergencyName}}</td>
+                </tr>
+                <tr>
+                    <td> <div><span >Emergency Contact Relationship No.:</span> </div></td>
+                     <td>{{patient.emergencyRelationship}}</td>
+                </tr>
+                <tr>
+                    <td> <div><span >Patient County :</span> </div></td>
+                     <td>{{patient.county}}</td>
+                </tr>
+                <tr>
+                    <td><div><span >Patient Address:</span></div></td>
+                     <td> {{patient.address}}</td>
+                </tr>
+                 <tr>
+                    <td><div><span >Patient Blood Group:</span></div></td>
+                     <td>  {{patient.bloodGroup}}</td>
+                </tr>
+                 <tr>
+                    <td><div><span >Patient Gender.:</span> </div></td>
+                     <td> {{patient.gender}}</td>
+                </tr>
+                 <tr>
+                    <td> <div><span >Patient Symptoms.:</span></div></td>
+                     <td>  {{patient_diagnosis.symptoms}}</td>
+                </tr>
+                 <tr>
+                    <td> <div><span >Program.:</span> </div></td>
+                     <td> {{patient_diagnosis.program}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+    </section><hr>
+    <section>
+        <div >
+            <h3 class="profile-heading">Doctor's Notes</h3>
+            <p>{{patient_diagnosis.notes}}</p>
+        </div>
+
+    </section><hr>
+    <section>
+        <div>
+            <button class="register-btn" onclick="window.print()">Print Profile</button>
+
+        </div>
+    </section>
+
+</div>
+
+{% include 'footer.html' %}

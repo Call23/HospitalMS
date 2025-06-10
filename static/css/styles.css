@@ -1,0 +1,586 @@
+body{
+margin:0;
+height:100%;
+display:flex;
+flex-direction:column;
+}
+
+.video-bg{
+position:absolute;
+right:0;
+bottom:0;
+z-index:-1;
+object-fit:cover;
+
+}
+@media(min-aspect-ratio:16/9){
+.video-bg{
+width:100%;
+height:auto;
+}
+
+}
+
+@media(max-aspect-ratio:16/9){
+.video-bg{
+width:auto;
+height:100%;
+}
+}
+.index-h1{
+color:white;
+font-size:3rem;
+display:flex;
+font-weight:bold;
+text-align:center;
+
+justify-content:center;
+align-items:center;
+animation: fadeIn 1s ease-out forwards;
+opacity:0;
+}
+.services{
+margin :20px 0 0 20%;
+list-style:none;
+
+}
+.services li{
+font-size:2.5rem;
+color:white;
+font-weight:bold;
+animation: fadeInUp 1.5s ease-out forwards;
+opacity:0;
+}
+
+.services li:nth-child(1){
+animation-delay:1.2s;
+}
+.services li:nth-child(2){
+animation-delay:1.8s;
+}
+.services li:nth-child(3){
+animation-delay:2.2s;
+}
+
+@keyframes fadeIn{
+to{opacity:1}
+}
+
+@keyframes fadeInUp{
+from{
+opacity:0;
+transform: scale(0.7) translateY(20px);
+}
+to{
+opacity:1;
+transform: scale(1) translateY(0);
+}
+}
+.card {
+    margin-left:30%;
+    margin-top:6%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 40%;
+    margin-bottom:20%;
+
+}
+
+.container {
+    margin-top:3%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Full height */
+    max-width: 70%; /* Full width */
+    padding: 1% 10%;
+
+
+}
+
+.heading{
+    margin-top:52px;
+    color: #141E46;
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    gap:40px;
+    width:100%;
+    position:fixed;
+    top:0;
+    z-index: 5;
+    height:auto;
+
+}
+
+.header {
+    background-color: #141E46;
+    color: white;
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width:100%;
+    position:fixed;
+    top:0;
+    z-index: 1000;
+    height:50px;
+}
+
+/* Example styles for the header title */
+.header h1 {
+    font-size: 40px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Example styles for navigation links in the header */
+.header nav a {
+    font-size: 20px;
+    color: white; /* Set text color for links */
+    text-decoration: none; /* Remove underline from links */
+    margin-right:50px;
+}
+
+/* Example hover effect for navigation links */
+.header nav a:hover {
+    color: #ccc; /* Change text color on hover */
+}
+
+.icon{
+    width: 20px; /* Set the width of the logo */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 50px; /* Add rounded corners if desired */
+
+}
+.footer {
+    background-color:#141E46;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    position:fixed;
+    left:0;
+    justify-content: space-around;
+    align-items: center;
+    bottom:0;
+    width:100%;
+    text-size:25px;
+
+     height:5%;
+
+}
+
+/* Style for footer sections (e.g., links, social media icons, etc.) */
+.footer .section {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+/* Style for footer links */
+.footer a {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    padding: 0 5px;
+}
+
+/* Hover effect for footer links */
+.footer a:hover {
+    color: #ccc; /* Change text color on hover */
+}
+.welcome{
+    color:#1a237e;
+    font-size:20px;
+    font-family:sans;
+    margin: 10px 10px;
+}
+
+.h2{
+     margin-top:10px;
+    margin-left:10%;
+    text-align: center; /* Center heading text */
+    color:#1a237e;
+    font-size:40px;
+    font-family:sans;
+
+}
+
+.forgot{
+     margin-left:10%;
+    text-align: center; /* Center heading text */
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+
+
+/* Input styling */
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: grey;
+    font-size:17px;
+    font-family:sans;
+
+}
+
+/* Submit button styling */
+.login-btn {
+    width: 50%;
+    padding: 10px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size:24px;
+    margin-left:25%;
+    margin-top:3%;
+}
+
+.login-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.register-btn {
+    width: auto;
+    padding: 10px 10px;
+    background-color: #1a237e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size:24px;
+    margin: auto;
+    display:block;
+    text-decoration: none;
+    height:auto;
+
+}
+.register-btn:hover {
+    background-color: blue;
+}
+.select{
+    color: grey;
+    font-size:17px;
+    font-family:sans;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width:100%;
+    padding:5px;
+}
+.select options{
+    color: grey;
+    font-size:17px;
+    font-family:sans;
+    padding:10px;
+}
+
+.options label{
+     color: grey;
+    font-size:17px;
+    font-family:sans;
+    display: inline-flex;
+    gap: 10px;
+    margin-top: 2px;
+}
+
+.label {
+    font-weight: bold;
+    font-size:20px;
+    color: #1a237e;
+    font-family:sans;
+}
+.home-container{
+margin-top: 10%;
+display:flex;
+
+}
+.sidebar{
+    position:fixed;
+    left:0;
+    z-index:10;
+    width:250px;
+
+    height:auto;
+    margin: 5px 5px;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction:column;
+
+}
+.content{
+    width:calc(100%-250px);
+    margin-left:300px;
+
+    height:auto;
+    overflow:auto;
+}
+.button{
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 1px;
+    text-align:center;
+    border-radius:3px;
+    background-color:#1a237e;
+    width:100%;
+    margin-bottom:5px;
+
+}
+.button:hover {
+    background-color: blue;
+}
+.search-container{
+display:flex;
+align-items:center;
+gap:2px;
+}
+.search-container button{
+cursor:pointer;
+padding: 14px 4px;
+font-size:16px;
+width:10%;
+height: auto;
+}
+
+.table{
+margin-bottom: 10%;
+#border-collapse: collapse;
+
+}
+
+.table th, .table td{
+border: 3px solid blue;
+padding:4px 4px;
+
+color:black;
+font-size:23px;
+font-family:sans;
+
+}
+
+.table tbody tr:nth-child(even){
+background-color: teal;
+color:white;
+
+}
+
+.table th{
+background-color: #1a237e;
+text-align:center;
+color: white;
+font-size:30px;
+padding:10px 30px;
+
+}
+.profile-btn{
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px 5px;
+    text-align:center;
+    border-radius:3px;
+    background-color:#1a237e;
+    width:100%;
+    margin-bottom:5px;
+}
+
+.profile-container{
+margin-top:7%;
+margin-bottom:10%;
+margin-left:auto;
+margin-right:auto;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+max-width:80%;
+font-family:Arial sas-serif;
+padding:30px 30px;
+}
+.data-values{
+text-size:18px;
+ padding: 5px 5px;
+ text-align:left;
+}
+.data-heading{
+text-size:24px;
+ padding: 5px 5px;
+ text-align:center;
+
+}
+
+.img {
+    width: 50px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+    border: 2px solid #ccc;
+}
+.profile-heading{
+text-align:center;
+margin:0;
+font-size:30px;
+color: #1a237e;;
+}
+
+.section1{
+
+display:flex;
+align-items:center;
+gap:2px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.activity-item {
+    padding: 10px; /* Padding around each item */
+    border-bottom: 1px solid #e0e0e0; /* Light gray border between items */
+     margin-top:1%;
+}
+
+.activity-name {
+    font-weight: bold; /* Bold font for activity name */
+    color: #003C43; /* Blue color for activity name */
+     font-size: 30px;
+}
+
+/* Hover effect for list items */
+.activity-item:hover {
+    background-color: #f0f8ff;
+}
+.container-activity {
+    margin-top:2%;
+    padding: 10px; /* Padding around the content */
+    background-color: white; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    text-align: center; /* Center the text */
+}
+
+/* Delete button styling */
+.delete-btn {
+    padding: 10px 15px; /* Padding */
+    background-color: #ff4d4d; /* Red background */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-weight: bold; /* Bold text */
+     text-decoration: none;
+     margin-left:10%;
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+/* Hover effect */
+.delete-btn:hover {
+    background-color: #ff1a1a; /* Darker red on hover */
+}
+
+.update-btn {
+    padding: 10px 15px; /* Padding */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+     text-decoration: none;
+      margin-left:30%;
+}
+
+/* Hover effect */
+.update-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Container for messages */
+.message-container {
+    margin-left:30%;
+    margin-right:30%;
+    background:#F5EEDD;
+    padding: 2px;
+    border-radius: 5px;
+    margin-bottom: 1px;
+     text-align: center;
+    animation: fade-out 3s forwards;
+    }
+.welcome-message {
+    background-color: #FFFBDA;
+    border-radius: 10px;
+    font-size:24px;
+    text-align: center;
+    font-family: Rubik, sans-serif;
+    font-style: italic;
+}
+
+/* Success message */
+.success-message {
+    color: green;
+    font-weight: bold;
+}
+
+/* Error message */
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+/* Informational message */
+.info-message {
+    color: blue;
+    font-style: italic;
+}
+
+.message {
+    animation: fade-in 0.5s;
+}
+
+@keyframes fade-out {
+        from {
+            opacity: 1; /* Start opacity */
+        }
+        to {
+            opacity: 0; /* End opacity */
+            visibility: hidden; /* Hide the element after animation */
+        }
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list li {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 50px;
+    color: #1a237e;
+    margin-left:2%;
+    justify-content: center;
+
+}

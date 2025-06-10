@@ -1,0 +1,66 @@
+{% include 'header.html' %}
+
+<div class="heading">
+   <h2 class="welcome">Welcome, {{current_user.name.strip().split()[0]}}!</h2>
+    <h2 class="h2">Patients list.</h2>
+</div>
+<div>
+
+    <div class="home-container">
+        <div class="sidebar">
+            <form method="POST" action="{{url_for('search')}}">
+                <div class="search-container">
+                    <div class="form-group">
+
+                        <input type="number" name="search" required placeholder="Search patient by ID" />
+
+                   </div>
+                 <button class="button">Q</button>
+
+                </div>
+
+            </form>
+
+            <a class="button" href="{{url_for('addPatient')}}"> Add patient</a>
+             <a class="button" href="{{url_for('get_data')}}"> JSON Data</a>
+        </div>
+        <div class="content">
+
+
+           <table class="table">
+
+               <thead>
+               <tr>
+                   <th>S/No.</th>
+                   <th>ID/Birth No.</th>
+                   <th>Name</th>
+               </tr>
+               </thead>
+               <tbody>
+               {% if result: %}
+
+               <tr>
+                   <td>{{result.id}}
+                    <td>{{result.birth_id}}</td>
+                    <td>{{result.name}}</td>
+                   <td><a class="profile-btn" href="{{url_for('profile', patient_id=result.id)}}">View Profile</a></td>
+                    <td><a class="profile-btn" href="{{url_for('diagnosis', patient_id=result.id)}}">Diagnosis</a></td>
+               </tr>
+               </tbody>
+
+           </table>
+            {%else:%}
+            <div class="message-container message info-message fade-out">
+                   <p>No records found.</p>
+               </div>
+
+
+            {%endif%}
+
+        </div>
+    </div>
+
+
+</div>
+
+{% include 'footer.html' %}

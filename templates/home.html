@@ -1,0 +1,68 @@
+{% include 'header.html' %}
+
+<div class="heading">
+   <h2 class="welcome">Welcome, {{current_user.name.strip().split()[0]}}!</h2>
+    <h2 class="h2">Patients list.</h2>
+</div>
+<div>
+
+    <div class="home-container">
+        <div class="sidebar">
+            <form method="POST" action="{{url_for('search')}}">
+                <div class="search-container">
+                    <div class="form-group">
+
+                        <input type="text" name="search" required placeholder="Search patient" />
+
+                   </div>
+                 <button class="button">Q</button>
+
+                </div>
+
+            </form>
+
+            <a class="button" href="{{url_for('addPatient')}}"> Add patient</a>
+             <a class="button" href="{{url_for('get_data')}}"> JSON Data</a>
+
+        </div>
+        <div class="content">
+
+
+           <table class="table">
+
+               <thead>
+               <tr>
+                   <th>S/No.</th>
+                   <th>ID/Birth No.</th>
+                   <th>Name</th>
+               </tr>
+               </thead>
+               <tbody>
+               {% if patients: %}
+            {% for patient in patients %}
+               <tr>
+                   <td>{{patient.id}}
+                    <td>{{patient.birth_id}}</td>
+                    <td>{{patient.name}}</td>
+                   <td><a class="profile-btn" href="{{url_for('profile', patient_id=patient.id)}}">View Profile</a></td>
+                    <td><a class="profile-btn" href="{{url_for('diagnosis', patient_id=patient.id)}}">Diagnosis</a></td>
+               </tr>
+               </tbody>
+               {%endfor%}
+
+           </table>
+            {%else:%}
+            <div class="message-container message info-message fade-out">
+                   <p>No records found.</p>
+               </div>
+
+
+            {%endif%}
+
+        </div>
+    </div>
+
+
+</div>
+
+{% include 'footer.html' %}

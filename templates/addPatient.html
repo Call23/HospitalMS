@@ -1,0 +1,90 @@
+{% include 'header.html' %}
+
+<div class="container">
+
+    <div class="card">
+        <div class="message-container message info-message fade-out">
+             {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+
+                    {% for message in messages %}
+                      <p>{{ message }}</p>
+                    {% endfor %}
+
+                  {% endif %}
+             {% endwith %}
+        </div>
+        <form  action="{{url_for('addPatient')}}" method="POST">
+                <h2 class="h2">Patient Personal information.</h2>
+             <div class="form-group">
+                 <label class="label">ID/ Birth Number</label><hr>
+                 <input type="number" name="birth_id" required placeholder="ID/ Birth number"/><br>
+               </div>
+            <div class="form-group">
+                 <label class="label">Full Name</label><hr>
+                 <input type="text" name="name" required placeholder="Patient name"/><br>
+               </div>
+                <div class="form-group">
+                 <label class="label" >Date of Birth</label><hr>
+                    <input type="date"  name="dob" required >
+                </div>
+            <div class="form-group">
+                 <label class="label">Phone Number</label><hr>
+                <input type="tel"  name="phone" required pattern="[0-9]{10}" placeholder="0700000000">
+            </div>
+            <div class="form-group">
+                 <div class="form-group">
+                 <label class="label">Emergency Full Name</label><hr>
+                 <input type="text" name="emergencyName" required placeholder="Emergency name"/><br>
+               </div>
+                 <div class="form-group">
+                 <label class="label">Contact Relationship</label><hr>
+                 <input type="text" name="emergencyRelationship" required placeholder="Emergency relationship"/><br>
+               </div>
+                  <label class="label">Emergency Contact</label><hr>
+                <input type="tel"  name="emergencyContact" required pattern="[0-9]{10}"  placeholder="0700000000">
+            </div>
+             <div class="form-group">
+                <label class="label">County</label><hr>
+                <select class="select" name="county" >
+                    <option value="">--Select county--</option>
+                   {% for county in counties%}
+                    <option value={{county}}>{{county}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <div class="form-group">
+                 <label class="label">Address</label><hr>
+                 <textarea class="select" name="address" rows="1"  required></textarea>
+            </div>
+             <div class="form-group">
+                <label class="label">Blood Group</label><hr>
+                <select class="select" name="bloodGroup" >
+                    <option value="">--Select bloodgroup--</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                 <label class="label">Gender</label><hr>
+                <div class="options">
+                    <label ><input type="radio" name="gender" value="Male" required> Male</label>
+                    <label ><input type="radio" name="gender" value="Female"> Female</label>
+                    <label ><input type="radio" name="gender" value="Other"> Other</label>
+                </div>
+            </div>
+            <input class="register-btn" type="submit" value="Submit"/>
+
+        </form>
+        </div>
+
+</div>
+{% include 'footer.html' %}
