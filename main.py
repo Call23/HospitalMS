@@ -1,9 +1,14 @@
-from flask import Flask, render_template, url_for, request, flash, redirect, jsonify
+from flask import Flask, render_template, url_for, request, flash, redirect, jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, current_user, login_required, logout_user
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, text
+
+from flask_mail import Mail, Message
+import random
+
+
 
 
 counties = ['Mombasa', 'Kwale', 'Kilifi', 'Tana' 'River', 'Lamu', 'Taita/Taveta', 'Garissa', 'Wajir', 'Mandera'
@@ -15,6 +20,16 @@ counties = ['Mombasa', 'Kwale', 'Kilifi', 'Tana' 'River', 'Lamu', 'Taita/Taveta'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
+
+# 2FA
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Use your SMTP provider
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'munazayyas@gmail.com'  # Your email
+app.config['MAIL_PASSWORD'] = 'ifwx sjak mthx swxn'  # Use app password or token
+app.config['MAIL_DEFAULT_SENDER'] = app.config['MAIL_USERNAME']
+
+mail = Mail(app)
 
 
 class Base(DeclarativeBase):
@@ -35,6 +50,7 @@ class Users(UserMixin, db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     serviceNumber: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
     name: Mapped[str] = mapped_column(String(250), nullable=False)
+    email: Mapped[str] = mapped_column(String(250), nullable=False)
     password: Mapped[str] = mapped_column(String(250), nullable=False)
 
 
@@ -99,30 +115,79 @@ def home():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     serviceNumbers = db.session.execute(db.select(Users.serviceNumber)).scalars().all()
+    emails = db.session.execute(db.select(Users.email)).scalars().all()
     if request.method == 'POST':
         name = request.form['name']
+        email = request.form['email']
         serviceNumber = request.form['serviceNumber']
         password = request.form['password']
         repeatPassword = request.form['repeatPassword']
-        hashedPassword = generate_password_hash(password, method='pbkdf2:sha256', salt_length=8)
+       
         if serviceNumber in serviceNumbers:
             flash(" The number exists. Login instead.")
+            return redirect(url_for('login'))
+        if email in emails:
+            flash(" The email exists. Login instead.")
             return redirect(url_for('login'))
         if password != repeatPassword:
             flash("Passwords do not match")
             return redirect(url_for('register'))
-        else:
-            new_user = Users(
-                name=name,
-                serviceNumber=serviceNumber,
-                password=hashedPassword,
-            )
-        db.session.add(new_user)
-        db.session.commit()
-        login_user(new_user)
-        return redirect('/home')
+         # ✅ Generate 6-digit code
+        verification_code = str(random.randint(100000, 999999))
+
+        # ✅ Store in session temporarily
+        session['pending_user'] = {
+            'name': name,
+            'email': email,
+            'serviceNumber': serviceNumber,
+            'password': generate_password_hash(password, method='pbkdf2:sha256', salt_length=8),
+            'code': verification_code,
+        }
+         # ✅ Send email
+        msg = Message("Verify Your Email", recipients=[email])
+        msg.body = f"Your verification code is: {verification_code}"
+        mail.send(msg)
+
+        flash("A verification code has been sent to your email.")
+        return redirect(url_for('verify'))
+       
+        
 
     return render_template('register.html')
+
+@app.route('/verify', methods=['POST', 'GET'])
+def verify():
+    if request.method == 'POST':
+        code_entered = request.form['code']
+        pending_user = session.get('pending_user')
+
+        if not pending_user:
+            flash("Session expired. Please register again.")
+            return redirect(url_for('register'))
+
+        if code_entered == pending_user['code']:
+            # ✅ Create user
+            new_user = Users(
+                name=pending_user['name'],
+                email=pending_user['email'],
+                serviceNumber=pending_user['serviceNumber'],
+                password=pending_user['password']
+            )
+            db.session.add(new_user)
+            db.session.commit()
+
+            # ✅ Clean up session
+            session.pop('pending_user', None)
+
+            flash("Email verified. Account created successfully.")
+            login_user(new_user)
+            return redirect('/home')
+        else:
+            flash("Invalid verification code.")
+            return redirect(url_for('verify_email'))
+
+
+    return render_template('verify.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
