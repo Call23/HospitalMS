@@ -1,15 +1,7 @@
-# Core Flask framework
 flask
-
-# Database and ORM
 flask_sqlalchemy
 sqlalchemy
-
-# User authentication
 flask_login
 werkzeug
-
-# Email support
 flask_mail
-
 
